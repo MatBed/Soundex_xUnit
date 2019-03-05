@@ -3,9 +3,27 @@ using System.Linq;
 
 namespace Soundex_CSharp_xUnit
 {
-    public class SoundexAlgorithm
+    public class SoundexAlgorithm : IAlgorithm
     {
-        SoundexData soundexData = new SoundexData();
+        private IAlgorithmData soundexData;
+        private IAlgorithm _algorithm;
+
+        public SoundexAlgorithm()
+        {
+            soundexData = new SoundexData();
+        }
+
+        public SoundexAlgorithm(IAlgorithmData data)
+        {
+            _algorithm = new SoundexAlgorithm();
+            soundexData = data;
+        }
+
+        public SoundexAlgorithm(IAlgorithmData data, IAlgorithm algorithm)
+        {
+            soundexData = data;
+            _algorithm = algorithm;
+        }
 
         public string Encode(string word)
         {
@@ -85,5 +103,11 @@ namespace Soundex_CSharp_xUnit
 
             return false;
         }
+    }
+
+    public interface IAlgorithm
+    {
+        string Encode(string word);
+        string EncodeWord(string word);
     }
 }

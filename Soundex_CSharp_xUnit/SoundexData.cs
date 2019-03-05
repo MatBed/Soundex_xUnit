@@ -2,11 +2,11 @@
 
 namespace Soundex_CSharp_xUnit
 {
-    public class SoundexData
+    public class SoundexData : IAlgorithmData
     {
-        public Dictionary<string, string> charToNumber;
+        public Dictionary<string, string> charToNumber { get; set; }
 
-        public SoundexData()
+        public void SetData()
         {
             charToNumber = new Dictionary<string, string>();
 
@@ -34,5 +34,16 @@ namespace Soundex_CSharp_xUnit
 
             charToNumber.Add("r", "6");
         }
+
+        public SoundexData()
+        {
+            SetData();
+        }
+    }
+
+    public interface IAlgorithmData
+    {
+        Dictionary<string, string> charToNumber { get; set; }
+        void SetData();
     }
 }
