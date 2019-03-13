@@ -105,6 +105,32 @@ namespace Soundex_CSharp_xUnit
         }
     }
 
+    public interface ISaveData
+    {
+        void SaveWord(string word);
+    }
+
+    public class DataContaioner
+    {
+        private ISaveData _dataContainer;
+
+        public DataContaioner()
+        {
+
+        }
+
+        public DataContaioner(ISaveData data)
+        {
+            _dataContainer = data;
+        }
+
+        public void Save(string word)
+        {
+            _dataContainer.SaveWord(word);
+        }
+    }
+
+
     public interface IAlgorithm
     {
         string Encode(string word);

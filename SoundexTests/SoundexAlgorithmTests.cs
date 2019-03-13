@@ -1,5 +1,6 @@
 ﻿using Soundex_CSharp_xUnit;
 using Xunit;
+using NSubstitute;
 
 namespace SoundexTests
 {
@@ -172,6 +173,16 @@ namespace SoundexTests
             string expectedValue = soundex.Encode(word);
 
             Assert.Equal("h555", expectedValue);
+        }
+
+        [Fact]
+        public void WhenCallToSaveMethodThenTheNumberOfCalledToSaveWordMethodIsOne()
+        {
+            var soundexMock = Substitute.For<ISaveData>();
+            var dataContainer = new DataContaioner(soundexMock);
+            dataContainer.Save("abcd");
+
+            soundexMock.Received(1).SaveWord(Arg.Any<string>());
         }
     }
 }
